@@ -18,6 +18,7 @@ RSpec.describe 'User Dashboard' do
   let!(:user_party7) { create(:user_party, user: user5, viewing_party: party1) }
 
   before :each do
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user1)
     visit user_path(user1)
   end
 

@@ -14,10 +14,12 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index]
   end
 
+  #without id
+
   # registration page
   get '/register', to: 'users#new', as: :register
   get '/login', to: 'users#login_form', as: :login
   post '/login', to: 'users#login_user', as: :login_post
-  get '/logout', to: 'users#logout_user', as: :logout
+  delete '/logout', to: 'users#logout_user', as: :logout
   get '/users/:id/discover', to: 'users#index', as: :discover
 end

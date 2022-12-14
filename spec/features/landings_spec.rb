@@ -68,16 +68,22 @@ RSpec.describe 'Landing Page' do
 
   it 'can successfully logout' do
     user = create(:user)
+
     visit login_path
-    fill_in(:email, with: user.email)
-    fill_in(:password, with: user.password)
-    click_on 'Log In'
-    click_on 'Log out'
+    fill_in :email, with: user.email
+    fill_in :password, with: user.password
+    click_button 'Log In'
 
     expect(current_path).to eq(root_path)
-    expect(page).to_not have_content('Log out')
+    expect(page).to have_link('Log out')
+    expect(page).to_not have_content('Create a new user')
+    expect(page).to_not have_content('I already have an account')
+    click_link 'Log out'
+
+    expect(current_path).to eq(root_path)
     expect(page).to have_content('Create a new user')
     expect(page).to have_content('I already have an account')
+    expect(page).to_not have_content('Log out')
   end
 
   it 'when logged in, there is a section that displays existing users emails. Each email is a link to their dashboard page' do

@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     if current_user
       @user = User.find(params[:id])
       @viewing_parties = @user.viewing_parties
+      # @user = current_user
     else
       redirect_to root_path
       flash[:error] = 'You must be logged in to see that page'
